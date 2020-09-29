@@ -20,11 +20,19 @@ namespace JobBoard.Controllers
     }
 
     [HttpPost("/JobOpenings")]
-    public ActionResult Create(string title,string description, string name, string email, string phoneNumber)
+    public ActionResult Create(string title, string description, string name, string email, string phoneNumber)
     {
       Contact contact = new Contact(name, email, phoneNumber);
-      JobOpening job = new JobOpening(title, description, contact); 
-      
+      JobOpening job = new JobOpening(title, description, contact);
+
+      return RedirectToAction("Index");
+    }
+
+    [HttpGet("/JobOpenings/Delete")]
+    public ActionResult Delete()
+    {
+      JobOpening.ClearAll();
+
       return RedirectToAction("Index");
     }
   }
